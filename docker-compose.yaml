@@ -22,7 +22,6 @@ services:
 
 volumes: 
   database_spring:
-  pgadmin:
 
 networks:
   postgres:
