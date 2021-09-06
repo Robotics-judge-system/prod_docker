@@ -4,9 +4,26 @@ services:
   db:
     image: postgres
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - database_spring:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=octopus
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
     ports: ["5444:5432"]
+    networks: 
+      - postgres
+
+  back:
+    build: .
+    ports: ["8080:8080"]
+    networks: 
+      - postgres
+    restart: on-failure
+
+volumes: 
+  database_spring:
+  pgadmin:
+
+networks:
+  postgres:
+    driver: bridge
