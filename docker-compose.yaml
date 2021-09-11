@@ -19,9 +19,22 @@ services:
     networks: 
       - postgres
     restart: on-failure
+  
+  pg_admin:
+    image: dpage/pgadmin4
+    restart: always
+    environment: 
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports: ["9000:80"]
+    volumes: 
+      - pg_pgadmin:/var/lib/pgadmin
+    networks: 
+      - postgres
 
 volumes: 
   database_spring:
+  pg_pgadmin:
 
 networks:
   postgres:
