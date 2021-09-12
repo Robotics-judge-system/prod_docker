@@ -14,7 +14,7 @@ services:
       - postgres
 
   back:
-    build: .
+    image: joust-backend
     ports: ["8080:8080"]
     networks: 
       - postgres
