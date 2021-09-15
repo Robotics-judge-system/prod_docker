@@ -14,7 +14,7 @@ services:
       - postgres
 
   back:
-    image: anarcom/joust-backend
+    build: .
     ports: ["8080:8080"]
     networks: 
       - postgres
