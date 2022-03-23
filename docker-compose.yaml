@@ -18,13 +18,13 @@ services:
     ports: ["8080:8080"]
     networks:
       - postgres
-      restart: on-failure
-      depends_on: db
-      environment:
-        - POSTGRES_DB_HOST=db
-        - POSTGRES_DB_PORT=5432
-        - POSTGRES_DB_USERNAME=root
-        - POSTGRES_DB_PASSWORD=root
+    restart: on-failure
+    depends_on: db
+    environment:
+      - POSTGRES_DB_HOST=db
+      - POSTGRES_DB_PORT=5432
+      - POSTGRES_DB_USERNAME=root
+      - POSTGRES_DB_PASSWORD=root
 
   pg_admin:
     image: dpage/pgadmin4
