@@ -10,34 +10,35 @@ services:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
     ports: ["5444:5432"]
-    networks: 
+    networks:
       - postgres
 
-        #  back:
-    #    build: .
-      #    ports: ["8080:8080"]
-      #    networks: 
-      #      - postgres
-        #    restart: on-failure
-      #    environment: 
-      #      - POSTGRES_DB_HOST=db
-        #      - POSTGRES_DB_PORT=5432
-        #      - POSTGRES_DB_USERNAME=root
-        #      - POSTGRES_DB_PASSWORD=root
-  
+  back:
+    build: .
+    ports: ["8080:8080"]
+    networks:
+      - postgres
+      restart: on-failure
+      depends_on: db
+      environment:
+        - POSTGRES_DB_HOST=db
+        - POSTGRES_DB_PORT=5432
+        - POSTGRES_DB_USERNAME=root
+        - POSTGRES_DB_PASSWORD=root
+
   pg_admin:
     image: dpage/pgadmin4
     restart: always
-    environment: 
+    environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: root
     ports: ["9000:80"]
-    volumes: 
+    volumes:
       - pg_pgadmin:/var/lib/pgadmin
-    networks: 
+    networks:
       - postgres
 
-volumes: 
+volumes:
   database_spring:
   pg_pgadmin:
 
