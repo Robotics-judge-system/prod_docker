@@ -14,7 +14,9 @@ services:
       - postgres
 
   back:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports: ["8080:8080"]
     networks:
       - postgres
@@ -26,6 +28,13 @@ services:
       - POSTGRES_DB_PORT=5432
       - POSTGRES_DB_USERNAME=root
       - POSTGRES_DB_PASSWORD=root
+
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile-front
+    ports: ["3000:3000"]
+    restart: on-failure
 
   pg_admin:
     image: dpage/pgadmin4
